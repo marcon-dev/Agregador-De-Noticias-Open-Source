@@ -1,0 +1,253 @@
+@import url("./root.css");
+
+body {
+    background-color: var(--bg-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.09' fill-rule='nonzero'%3E%3Cpath d='M29 58.58l7.38-7.39A30.95 30.95 0 0 1 29 37.84a30.95 30.95 0 0 1-7.38 13.36l7.37 7.38zm1.4 1.41l.01.01h-2.84l-7.37-7.38A30.95 30.95 0 0 1 6.84 60H0v-1.02a28.9 28.9 0 0 0 18.79-7.78L0 32.41v-4.84L18.78 8.79A28.9 28.9 0 0 0 0 1.02V0h6.84a30.95 30.95 0 0 1 13.35 7.38L27.57 0h2.84l7.39 7.38A30.95 30.95 0 0 1 51.16 0H60v27.58-.01V60h-8.84a30.95 30.95 0 0 1-13.37-7.4L30.4 60zM29 1.41l-7.4 7.38A30.95 30.95 0 0 1 29 22.16 30.95 30.95 0 0 1 36.38 8.8L29 1.4zM58 1A28.9 28.9 0 0 0 39.2 8.8L58 27.58V1.02zm-20.2 9.2A28.9 28.9 0 0 0 30.02 29h26.56L37.8 10.21zM30.02 31a28.9 28.9 0 0 0 7.77 18.79l18.79-18.79H30.02zm9.18 20.2A28.9 28.9 0 0 0 58 59V32.4L39.2 51.19zm-19-1.4a28.9 28.9 0 0 0 7.78-18.8H1.41l18.8 18.8zm7.78-20.8A28.9 28.9 0 0 0 20.2 10.2L1.41 29h26.57z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 60px 60px;
+    background-position: top left;
+    font-family: var(--ff-primary);
+}
+
+[hidden] { display: none !important; }
+
+/* shared container layout */
+.geosense-header-primary,
+.geosense-main-primary,
+.geosense-footer-primary {
+    width: min(100%, var(--container-max));
+    margin-inline: auto;
+}
+
+.geosense-location-select {
+    font-family: var(--ff-secondary);
+    font-size: 1.5rem;
+    color: var(--text-subtle);
+    cursor: pointer;
+    border: none;
+    padding: 2px 0;
+    outline: none;
+    background: transparent;
+    width: 160px;
+}
+
+.geosense-locationweather {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.geosense-phrases-status {
+    color: var(--accent);
+}
+
+/* ================ */
+
+.geosense-main-primary {
+    margin-block-start: 1.65rem;
+}
+
+.geosense-article {
+    padding: 10px;
+    border-block: 1px solid var(--border-muted);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.geosense-article:is(:hover, :focus-visible) {
+    background-color: var(--hover-bg);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--border-muted-hover);
+}
+
+.geosense-article:focus-visible {
+    outline: 2px solid rgba(59, 130, 246, 0.35); /* soft blue */
+}
+
+.geosense-article:is(:hover, :focus-visible) .geosense-article-title {
+    text-decoration: underline;
+}
+
+.geosense-article-title {
+    font-family: var(--ff-primary);
+    font-size: 1.89rem;
+}
+
+.geosense-article-extrainfo {
+    font-size: 0.925rem;
+    font-family: var(--ff-secondary);
+}
+
+.geosense-article-paragraph {
+    margin-top: 1rem;
+    font-size: 1.09rem;
+    font-family: var(--ff-secondary);
+}
+
+/* ================ */
+
+.geosense-footer-component {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+}
+
+/* ===== Modal (Terms) ===== */
+.gs-modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+    z-index: 1000;
+}
+
+.gs-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.gs-modal__dialog {
+    width: min(92vw, 640px);
+    max-height: 80vh;
+    overflow: auto;
+    background: var(--bg-primary);
+    color: inherit;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    padding: 1.25rem 1.25rem 1.5rem;
+    transform: translateY(6px) scale(0.98);
+    opacity: 0.98;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.gs-modal.is-open .gs-modal__dialog {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.gs-modal__content {
+    font-family: var(--ff-secondary);
+    font-size: 1rem;
+    line-height: 1.55;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.gs-modal--tutorial .gs-modal__content {
+    text-align: center;
+    align-items: center;
+}
+
+.gs-modal--tutorial .gs-modal__content h1 {
+    font-size: 1.65rem;
+}
+
+#quicktip-desktop,
+#quicktip-mobile {
+    display: grid;
+    gap: 0.5rem;
+}
+
+#quicktip-desktop p,
+#quicktip-mobile p {
+    margin: 0;
+}
+
+.gs-modal__close {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #333;
+}
+
+@media (max-width: 480px) {
+  .gs-modal__dialog {
+    width: 96vw;
+    padding: 1rem 1rem 1.25rem;
+  }
+  .gs-modal--tutorial .gs-modal__content {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  #quicktip-mobile p,
+  #quicktip-desktop p {
+    font-size: 1.05rem;
+  }
+  .gs-modal__close {
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
+
+/* Fluid, readable typography on various viewports */
+.geosense-location-select { font-size: clamp(1rem, 2.2vw, 1.25rem); }
+.geosense-locationweather { font-size: clamp(1.25rem, 2.6vw, 1.75rem); }
+.geosense-article-title { font-size: clamp(1.2rem, 2.4vw, 1.9rem); }
+.geosense-article-paragraph { font-size: clamp(0.98rem, 2vw, 1.12rem); }
+.gs-modal--tutorial .gs-modal__content { font-size: clamp(0.98rem, 1.8vw, 1.08rem); }
+
+/* Give containers breathing room on narrow screens */
+@media (max-width: 768px) {
+  .geosense-header-primary,
+  .geosense-main-primary,
+  .geosense-footer-primary {
+    padding-inline: 1rem;
+  }
+}
+
+/* Footer stacks neatly on small screens */
+@media (max-width: 640px) {
+  .geosense-footer-component {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
+/* Improve tap targets and spacing for articles on mobile */
+@media (max-width: 600px) {
+  .geosense-article { padding: 14px; }
+  .geosense-article-title { line-height: 1.25; }
+  .geosense-article-paragraph { line-height: 1.55; }
+}
+
+/* Modal sizing refinements for small devices */
+@media (max-width: 768px) {
+  .gs-modal__dialog {
+    width: 94vw;
+    max-height: 85vh;
+    padding: 1rem 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gs-modal__dialog {
+    width: 96vw;
+    max-height: 88vh;
+  }
+  /* Slightly larger quick tip text on very small screens for readability */
+  #quicktip-mobile p,
+  #quicktip-desktop p {
+    font-size: clamp(1rem, 2.8vw, 1.08rem);
+  }
+}

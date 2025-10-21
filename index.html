@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-GB" itemscope itemtype="https://schema.org/WebApplication">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geosense</title>
+    <!-- CSS Styling -->
+    <link rel="stylesheet" href="./public/assets/css/style.css" type="text/css" />
+    <!-- Google Fonts API-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Detection of Devices -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const desktop = document.getElementById('quicktip-desktop');
+          const mobile = document.getElementById('quicktip-mobile');
+          if (!desktop || !mobile) return;
+  
+          const hasCoarsePointer = (typeof window.matchMedia === 'function') && window.matchMedia('(pointer: coarse)').matches;
+          const hasTouchPoints = (navigator.maxTouchPoints ?? 0) > 0;
+          const uaIsMobile = /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+          const isMobile = Boolean(hasCoarsePointer || hasTouchPoints || uaIsMobile);
+  
+          desktop.hidden = isMobile;
+          mobile.hidden = !isMobile;
+        });
+    </script>
+</head>
+<body>
+    <header class="geosense-header-primary">
+        <div class="geosense-header-component">
+            <select class="geosense-location-select" id="geosense-location-select">
+                <option value="Oakland" selected>Oakland</option>
+                <option value="San Francisco">S. Francisco</option>
+            </select>
+            <div class="geosense-locationweather">
+                <h2 class="geosense-phrases-status">Loading...</h2>
+                <h3 class="geosense-location-temperature">°C</h3>
+            </div>
+        </div>
+    </header>
+
+    <main class="geosense-main-primary">
+        <div class="geosense-main-component">
+        </div>
+    </main>
+
+    <footer class="geosense-footer-primary">
+        <div class="geosense-footer-component">
+            <span id="terms-of-usage">Terms of Usage & Privacy Policy</span>
+            <span> 2025 Geosense. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Terms Modal -->
+    <div class="gs-modal" id="terms-modal" aria-hidden="true">
+        <div class="gs-modal__backdrop" data-close="terms-modal"></div>
+        <div class="gs-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+            <button class="gs-modal__close" type="button" aria-label="Close" data-close="terms-modal">×</button>
+            <div class="gs-modal__content">
+                <h1 id="terms-title">Terms of Use & Privacy Policy</h1>
+
+                <h2>Introduction</h2>
+                <p>We value your privacy and are committed to protecting your personal information. This document outlines the terms of use and privacy policy governing the use of our website and services. Please read carefully before using our platform.</p>
+
+                <h2>Terms of Use</h2>
+                <p>By accessing or using this website, you agree to comply with and be bound by the following terms and conditions:</p>
+                <ol>
+                    <li>
+                        <strong>Use of the Website</strong><br />
+                        You agree to use the website only for lawful purposes and in a manner that does not infringe upon the rights of others or restrict their use and enjoyment of the site.
+                    </li>
+                    <li>
+                        <strong>Intellectual Property</strong><br />
+                        All content, logos, and materials available on this website are the intellectual property of the website owners or their respective licensors. You are not permitted to copy, modify, or distribute any content without prior written permission.
+                    </li>
+                    <li>
+                        <strong>No Responsibility for External Links</strong><br />
+                        Our website may contain links to third-party sites. We are not responsible for the content or privacy practices of these external websites. We do not endorse or have control over any of the third-party content linked here.
+                    </li>
+                    <li>
+                        <strong>Disclaimer of Liability</strong><br />
+                        While we strive to keep the information on our website accurate and up to date, we do not guarantee its accuracy. You use the site at your own risk, and we are not responsible for any damages arising from its use.
+                    </li>
+                    <li>
+                        <strong>Changes to the Terms</strong><br />
+                        We reserve the right to modify or update these terms of use at any time. Any changes will be posted on this page with an updated date.
+                    </li>
+                </ol>
+
+                <h2>Privacy Policy</h2>
+                <p>We take your privacy seriously and ensure that your personal information is protected. Below, you’ll find a summary of how we handle your data:</p>
+                <ol>
+                    <li>
+                        <strong>No Personal Information Collection</strong><br />
+                        We do not collect any personal information from users. We are committed to protecting your privacy by not requiring you to submit any personal data to access or use our website.
+                    </li>
+                    <li>
+                        <strong>Cookies</strong><br />
+                        We do not use cookies to collect or store any personal data. Cookies may be used for the sole purpose of improving website performance and user experience, and you can choose to disable cookies in your browser settings.
+                    </li>
+                    <li>
+                        <strong>Third-Party Services</strong><br />
+                        This website may use third-party services (such as analytics) that may collect information about how you interact with the website. These third parties are responsible for their own privacy policies, and we encourage you to review them.
+                    </li>
+                    <li>
+                        <strong>Data Security</strong><br />
+                        We take appropriate measures to protect your data from unauthorized access, alteration, or disclosure. However, please be aware that no method of data transmission over the internet is 100% secure.
+                    </li>
+                    <li>
+                        <strong>Changes to the Privacy Policy</strong><br />
+                        We may update this privacy policy from time to time. Any changes will be posted here with the effective date of the update.
+                    </li>
+                </ol>
+
+                <h2>Contact Us</h2>
+                <p>If you have any questions or concerns about these Terms of Use or Privacy Policy, please feel free to contact us.</p>
+
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div class="gs-modal gs-modal--tutorial" id="tutorial-modal" aria-hidden="true">
+        <div class="gs-modal__backdrop" data-close="tutorial-modal"></div>
+        <div class="gs-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="tutorial-title">
+            <button class="gs-modal__close" type="button" aria-label="Close" data-close="tutorial-modal">×</button>
+            <div class="gs-modal__content">
+                <h1 id="tutorial-title">Quick tip</h1>
+                <div id="quicktip-desktop">
+                    <p>Navigate between news batches using your keyboard:</p>
+                    <p><strong>Ctrl + Right Arrow</strong> → Next articles<br />
+                       <strong>Ctrl + Left Arrow</strong> → Previous/refresh articles</p>
+                    <p>You can also click an article to open it in a new tab.</p>
+                </div>
+                <div id="quicktip-mobile" hidden>
+                    <p>Touch and hold the screen, then <b>drag left</b> for newer news and <b>drag right</b> for past news.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./public/assets/js/animations.js"></script>
+    <script src="./public/assets/js/main.js"></script>
+    <script src="./public/assets/js/changeNews.js"></script>
+</body>
+</html>

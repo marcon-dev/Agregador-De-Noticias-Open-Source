@@ -1,0 +1,27 @@
+:root {
+    --bg-primary: hsl(210, 100%, 100%);
+
+    --ff-primary: "Inter", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", "Liberation Sans", "Arial", "sans-serif";
+    --ff-secondary: "Source Serif 4", "serif";
+
+    /* layout */
+    --container-max: 756px;
+
+    /* colors */
+    --text-subtle: #14141480;
+    --accent: rgb(255, 145, 0);
+    --border-muted: #2424243f;
+    --border-muted-hover: #24242466;
+    --hover-bg: rgba(0, 0, 0, 0.015);
+    --shadow-hover: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+    /* motion */
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --transition-fast: 120ms var(--ease-standard);
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
